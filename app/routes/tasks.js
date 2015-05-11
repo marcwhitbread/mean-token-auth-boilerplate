@@ -6,25 +6,29 @@ var Task = require('../models/Task.js');
 
 /* GET /tasks listing. */
 router.get('/', function(req, res, next) {
-  Task.find(function (err, tasks) {
-    if (err) return next(err);
-    res.json(tasks);
-  });
+	
+	Task.find(function (e, tasks) {
+		if(e) return next(e);
+		res.json(tasks);
+	});
+	
 });
 
 /* GET /tasks/id */
 router.get('/:id', function(req, res, next) {
-  Task.findById(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+	
+	Task.findById(req.params.id, function (e, post) {
+		if(e) return next(e);
+		res.json(post);
+	});
+	
 });
 
 /* POST /tasks */
 router.post('/', function(req, res, next) {
 	
-	Task.create(req.body, function (err, post) {
-		if (err) return next(err);
+	Task.create(req.body, function (e, post) {
+		if(e) return next(e);
 		res.json(post);
 	});
 	
@@ -32,10 +36,12 @@ router.post('/', function(req, res, next) {
 
 /* PUT /tasks/:id */
 router.put('/:id', function(req, res, next) {
-  Task.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+
+	Task.findByIdAndUpdate(req.params.id, req.body, function (e, post) {
+		if(e) return next(e);
+		res.json(post);
+	});
+
 });
 
 /* DELETE /tasks/:id */
