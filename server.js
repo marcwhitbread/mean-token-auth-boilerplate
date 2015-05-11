@@ -1,33 +1,31 @@
+//includes
 var express = require('express');
-var app = express();
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var path = require('path');
+
+//routes
+var routes = require('./routes/index');
 var tasks = require('./routes/tasks');
 
-mongoose.connect('mongodb://localhost/task-manager', function(e) {
-    
-    if(e)
-        console.log('connection error', e);
-    else
-        console.log('connection successful');
-    
-});
+//db connection
+mongoose.connect('mongodb://localhost/task-manager');
 
+var app = express();
+
+//for req.body parsing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//set view engine
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'ejs');
+
+//routes
+app.use('/', routes);
 app.use('/tasks', tasks);
 
-app.use(function (req, res, next) {
-	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	console.log('Client IP:', ip);
-	next();
-});
+//web server listening
+app.listen(8000);
 
-app.use('/tasks/:id', function (req, res, next) {
-	console.log('Request Type:', req.method);
-	next();
-});
-
-app.get('/tasks/:id', function (req, res, next) {
-	Todo.findById(req.params.id, function(e, todo){
-		if(e) res.send(e);
-		res.json(todo);
-	});
-});
+module.exports = app;
