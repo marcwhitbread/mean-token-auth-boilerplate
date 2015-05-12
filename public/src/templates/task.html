@@ -1,0 +1,10 @@
+New task <input type="text" ng-model="newTask"><button ng-click="save()">Create</button>
+
+Search: <input type="text" ng-model="search.name">
+<ul>
+	<li ng-repeat="task in tasks | filter: search">
+		<input type="checkbox" ng-model="task.completed" ng-change="update($index);">
+		<a href="#/{{task._id}}">{{task.name}}</a>
+		<button ng-click = "remove($index);">delete</button>
+	</li>
+</ul>
