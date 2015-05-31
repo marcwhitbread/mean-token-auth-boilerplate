@@ -3,7 +3,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
 		.when('/', {
 			templateUrl: '/templates/tasks.html',
-			controller: 'TaskController'
+			controller: 'TaskCtrl'
 		})
 	
 		.when('/:id', {
@@ -50,7 +50,7 @@ app.controller('TaskCtrl', ['$scope', 'Tasks', function ($scope, Tasks) {
 app.controller('TaskDetailCtrl', ['$scope', '$routeParams', 'Tasks', function ($scope, $routeParams, Tasks) {
 	$scope.task = Tasks.get({ id: $routeParams.id });
 }]);
-.factory('Tasks', ['$resource', function($resource) {
+app.factory('Tasks', ['$resource', function($resource) {
 	        
 	return $resource('/tasks/:id', null, {
 		'update': { method: 'PUT' }

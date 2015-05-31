@@ -15,10 +15,10 @@ module.exports = function(grunt) {
 					collapseWhitespace: true
 				},
 		    	files: [{
-					expand: true,
-					cwd: 'public/src/',
-					src: '**/*.{html}',
-					dest: 'public/dist/'
+			    	expand: true,
+					cwd: 'public/src',
+				    src: ['**/*.html'],
+				    dest: 'public/dist/'
 				}]
 	    	}
     	},
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 		    	},
 		    	files: [{
 			    	expand: true,
-			    	cwd: 'public/src/img/',
+			    	cwd: 'public/src/img',
 			    	src: ['**/*.{png,jpg,gif}'],
 			    	dest: 'public/dist/img/'
 			    }]
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 		},
     	watch: {
 	    	html: {
-		    	files: ['public/src/index.html', 'public/src/templates/**/*.html'],
+		    	files: ['public/src/**/*.html'],
 		    	tasks: ['htmlmin:compile']
 	    	},
 			img: {
