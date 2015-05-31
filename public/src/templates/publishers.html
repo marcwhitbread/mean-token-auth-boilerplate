@@ -1,0 +1,11 @@
+New publisher <input type="text" ng-model="newPublisher"><button ng-click="save()">Create</button>
+
+Search: <input type="text" ng-model="search.name">
+<ul>
+	<li ng-repeat="publisher in publishers | filter: search">
+		<a href="#/publisher/{{publisher._id}}">{{publisher.username}}</a>
+		<button ng-click = "remove($index);">delete</button>
+	</li>
+</ul>
+
+<a href = "#/tasks">Manage Tasks</a>

@@ -1,12 +1,21 @@
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
-		.when('/', {
+		.when('/publishers', {
+			templateUrl: '/templates/publishers.html',
+			controller: 'PublisherCtrl'
+		})
+		
+		.when('/tasks', {
 			templateUrl: '/templates/tasks.html',
-			controller: 'TaskController'
+			controller: 'TaskCtrl'
 		})
 	
-		.when('/:id', {
+		.when('/task/:id', {
 			templateUrl: '/templates/taskDetails.html',
 			controller: 'TaskDetailCtrl'
-		});
+		})
+		
+		.otherwise({
+        	redirectTo: '/tasks'
+      	});
 }]);

@@ -1,12 +1,13 @@
-app.controller('TaskCtrl', ['$scope', 'Tasks', function ($scope, Tasks) {
+app.controller('TaskCtrl', ['$scope', 'Tasks', 'Publishers', function ($scope, Tasks, Publishers) {
     
+    $scope.publishers = Publishers.query();
 	$scope.tasks = Tasks.query();
 	
 	$scope.save = function() {
 		
 		if(!$scope.newTask || $scope.newTask.length < 1) return;
 		
-		var task = new Tasks({ name: $scope.newTask, completed: false });
+		var task = new Tasks({ name: $scope.newTask, publisher: $scope.newPublisher, assignee: $scope.newPublisher, completed: false });
 	
 		task.$save(function() {
 			$scope.tasks.push(task);
