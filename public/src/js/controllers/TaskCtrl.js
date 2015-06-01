@@ -7,7 +7,7 @@ app.controller('TaskCtrl', ['$scope', 'Tasks', 'Publishers', function ($scope, T
 		
 		if(!$scope.newTask || $scope.newTask.length < 1) return;
 		
-		var task = new Tasks({ name: $scope.newTask, publisher: $scope.newPublisher, assignee: $scope.newPublisher, completed: false });
+		var task = new Tasks({ name: $scope.newTask, publisher: $scope.newPublisher._id, assignee: $scope.newPublisher._id, completed: false });
 	
 		task.$save(function() {
 			$scope.tasks.push(task);
@@ -19,6 +19,7 @@ app.controller('TaskCtrl', ['$scope', 'Tasks', 'Publishers', function ($scope, T
 	$scope.update = function(index) {
 		
 		var task = $scope.tasks[index];
+		console.log(task);
 		
 		Tasks.update({id: task._id}, task);
 

@@ -7,8 +7,12 @@ New task <input type="text" ng-model="newTask"> by
 Search: <input type="text" ng-model="search.name">
 <ul>
 	<li ng-repeat="task in tasks | filter: search">
+	
 		<input type="checkbox" ng-model="task.completed" ng-change="update($index);">
-		<a href="#/task/{{task._id}}">{{task.name}}</a> by <select ng-model="task.publisher.username" ng-options="publisher.username as publisher.username for publisher in publishers"></select> assigned to <select ng-model="task.assignee.username" ng-options="publisher.username as publisher.username for publisher in publishers"></select>
+		<a href="#/task/{{task._id}}">{{task.name}}</a> 
+		by <select ng-model="task.publisher" ng-options="publisher.username for publisher in publishers"></select> 
+		assigned to <select ng-model="task.assignee" ng-options="publisher.username for publisher in publishers"></select>
+		
 		<button ng-click = "update($index);">update</button>
 		<button ng-click = "remove($index);">delete</button>
 	</li>

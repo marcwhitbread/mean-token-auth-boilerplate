@@ -7,10 +7,13 @@ var Task = require('../models/Task.js');
 /* GET /tasks listing. */
 router.get('/', function(req, res, next) {
 	
-	Task.find(function (e, tasks) {
-		if(e) return next(e);
-		res.json(tasks);
-	});
+	Task
+		.find()
+		.populate('publisher assignee')
+		.exec(function(e, tasks) {
+			if(e) return next(e);
+			res.json(tasks);
+		});
 	
 });
 
@@ -27,19 +30,27 @@ router.get('/:id', function(req, res, next) {
 /* POST /tasks */
 router.post('/', function(req, res, next) {
 	
-	Task.create(req.body, function (e, post) {
+	Task.create(req.body, function (e, task) {
 		if(e) return next(e);
-		res.json(post);
+		
+		task.populate('publisher assignee', function(e) {
+			if(e) return next(e);
+			res.json(task);
+		});
 	});
 	
 });
 
 /* PUT /tasks/:id */
 router.put('/:id', function(req, res, next) {
-
-	Task.findByIdAndUpdate(req.params.id, req.body, function (e, post) {
+	
+	Task.findByIdAndUpdate(req.params.id, req.body, function (e, task) {
 		if(e) return next(e);
-		res.json(post);
+		
+		task.populate('publisher assignee', function(e) {
+			if(e) return next(e);
+			res.json(task);
+		});
 	});
 
 });

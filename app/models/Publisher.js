@@ -5,4 +5,5 @@ var PublisherSchema = new mongoose.Schema({
 	updated_at: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Publisher', PublisherSchema);
+var Publisher = mongoose.model('Publisher', PublisherSchema);
+module.exports = Publisher;
