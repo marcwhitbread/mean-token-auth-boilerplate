@@ -19,7 +19,6 @@ app.controller('TaskCtrl', ['$scope', 'Tasks', 'Publishers', function ($scope, T
 	$scope.update = function(index) {
 		
 		var task = $scope.tasks[index];
-		console.log(task);
 		
 		Tasks.update({id: task._id}, task);
 

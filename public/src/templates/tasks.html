@@ -10,10 +10,21 @@ Search: <input type="text" ng-model="search.name">
 	
 		<input type="checkbox" ng-model="task.completed" ng-change="update($index);">
 		<a href="#/task/{{task._id}}">{{task.name}}</a> 
-		by <select ng-model="task.publisher" ng-options="publisher.username for publisher in publishers"></select> 
-		assigned to <select ng-model="task.assignee" ng-options="publisher.username for publisher in publishers"></select>
 		
-		<button ng-click = "update($index);">update</button>
+		by 
+		<select 
+			ng-model="task.publisher._id" 
+			ng-options="publisher._id as publisher.username for publisher in publishers" 
+			ng-change="update($index);"></select> 
+		
+		assigned to 
+		<select 
+			ng-model="task.assignee._id" 
+			ng-options="publisher._id as publisher.username for publisher in publishers" 
+			ng-change="update($index);">
+		</select>
+		
+		<!--<button ng-click = "update($index);">update</button> -->
 		<button ng-click = "remove($index);">delete</button>
 	</li>
 </ul>
