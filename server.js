@@ -6,6 +6,7 @@ var path = require('path');
 
 //routes
 var routes = require('./app/routes/index');
+var login = require('./app/routes/login');
 var tasks = require('./app/routes/tasks');
 var publishers = require('./app/routes/publishers');
 
@@ -26,6 +27,7 @@ app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'ejs');
 
 //routes
+app.use('/login', login);
 app.use('/publishers', publishers);
 app.use('/tasks', tasks);
 app.use('/', routes);
