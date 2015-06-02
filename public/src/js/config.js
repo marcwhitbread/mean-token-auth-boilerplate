@@ -1,5 +1,15 @@
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
+		.when('/login', {
+			templateUrl: '/templates/login.html',
+			controller: 'LoginCtrl'
+		})
+		
+		.when('/users', {
+			templateUrl: '/templates/users.html',
+			controller: 'UserCtrl'
+		})
+		
 		.when('/publishers', {
 			templateUrl: '/templates/publishers.html',
 			controller: 'PublisherCtrl'

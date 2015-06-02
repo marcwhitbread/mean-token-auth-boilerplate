@@ -1,0 +1,17 @@
+<input placeholder="username" type="text" ng-model="username"/>
+<input placeholder="email" type="text" ng-model="email"/>
+<input placeholder="********" type="password" ng-model="password"/>
+<input type="submit" value="Sign Up" ng-click = "signup();"/>
+
+<ul>
+	<li ng-repeat="user in users">
+	
+		<a href="#/user/{{user._id}}">{{user.username}}, {{user.email}}, {{user.password}}</a> 
+		<button ng-click = "remove($index);">delete</button>
+		
+	</li>
+</ul>
+
+<a href = "#/users">Manage Users</a>
+<a href = "#/tasks">Manage Tasks</a>
+<a href = "#/publishers">Manage Publishers</a>
