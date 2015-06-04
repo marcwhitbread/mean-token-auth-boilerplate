@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt');
 
 var UserSchema = new mongoose.Schema({
 	username: { type: String, required: true, unique: true },
-	email: { type: String, required: true, unique: true },
+	email: { type: String, required: true },
 	password: { type: String, required: true },
 	updated_at: { type: Date, default: Date.now }
 });
@@ -30,7 +30,6 @@ UserSchema.methods.validPassword = function(password, callback) {
 	
 	bcrypt.compare(password, this.password, function(e, isMatch) {
 		if(e) return callback(e, null);
-		console.log(isMatch);
 		return callback(null, isMatch);
 	});
 	

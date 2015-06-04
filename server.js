@@ -29,13 +29,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //parse application/json
 app.use(bodyParser.json());
 
-//route to front-end code
+//route to front-end
 app.use(express.static(path.join(__dirname, '/public/dist')));
 
 //sessions
 app.use(cookieParser());
 app.use(session({ 
-	secret: 'keyboard cat',
+	secret: 'somesecret',
 	resave: false,
     saveUninitialized: false
 }));
@@ -44,11 +44,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routes
+app.use('/', routes);
 app.use('/auth', auth);
 app.use('/users', users);
 app.use('/publishers', publishers);
 app.use('/tasks', tasks);
-app.use('/', routes);
 
 //web server listening
 app.listen(8000);

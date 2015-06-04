@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
 var User = require('../models/User.js');
 
 /* GET /users listing. */
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 /* GET /users/id */
 router.get('/:id', function(req, res, next) {
 	
-	User.findById(req.params.id, function (e, user) {
+	User.findById(req.params.id, function(e, user) {
 		if(e) return next(e);
 		res.json(user);
 	});
@@ -29,7 +29,7 @@ router.get('/:id', function(req, res, next) {
 /* POST /users */
 router.post('/', function(req, res, next) {
 	
-	User.create(req.body, function (e, user) {
+	User.create(req.body, function(e, user) {
 		if(e) return next(e);
 		res.json(user);
 	});

@@ -30,6 +30,7 @@ passport.use(new LocalStrategy({
 			if(!isMatch) return done(null, false, { message: 'Incorrect password.' });
 			
 			return done(null, user);
+			
 		});
 		
 	});
