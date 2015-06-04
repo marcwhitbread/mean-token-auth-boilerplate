@@ -9,8 +9,13 @@ app.controller('UserCtrl', ['$scope', 'Users', function($scope, Users) {
 		if(!$scope.password || $scope.password.length < 1) return;
 		
 		var user = new Users({ username: $scope.username, email: $scope.email, password: $scope.password });
-		console.log(user);
-		user.$save(function() {});
+
+		user.$save(function() {
+			$scope.users.push(user);
+			$scope.username = '';
+			$scope.email = '';
+			$scope.password = '';
+		});
 		
 	}
 	

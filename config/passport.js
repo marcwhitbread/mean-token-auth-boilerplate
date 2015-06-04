@@ -17,20 +17,20 @@ passport.use(new LocalStrategy({
 	passwordField: 'password'
 }, function(username, password, done) {
 	
-	User.findOne({ username: username }, function(err, user) {
+	User.findOne({ username: username }, function(e, user) {
 		
-		console.log('Finding User...');
+		if(e) return done(e);
 		
-		if(err)
-			return done(err);
-		
-		if(!user)
-			return done(null, false, { message: 'Incorrect username.' });
+		if(!user) return done(null, false, { message: 'Incorrect username.' });
 
-		if(!user.validPassword(password))
-			return done(null, false, { message: 'Incorrect password.' });
-
-		return done(null, user);
+		user.validPassword(password, function(e, isMatch) {
+			
+			if(e) return done(e);
+			
+			if(!isMatch) return done(null, false, { message: 'Incorrect password.' });
+			
+			return done(null, user);
+		});
 		
 	});
 
