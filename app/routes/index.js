@@ -6,7 +6,7 @@ router.use(function(req, res, next) {
 	next();
 });
 
-router.use(function(req, res, next) {
+/*router.use(function(req, res, next) {
 	
 	if(req.method == 'POST' && req.url == '/login') {
 
@@ -17,8 +17,9 @@ router.use(function(req, res, next) {
 			
 	}
 	
-	next();
-});
+	next();	
+	
+});*/
 
 /*router.use(function(req, res) {
 	res.status(404).render('404', { title: '404: File Not Found' });

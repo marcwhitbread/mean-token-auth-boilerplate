@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 /* GET /users/id */
 router.get('/:id', function(req, res, next) {
 	
-	User.findById(req.params.id, function(e, user) {
+	User.findById(req.params.id, function (e, user) {
 		if(e) return next(e);
 		res.json(user);
 	});
@@ -29,7 +29,9 @@ router.get('/:id', function(req, res, next) {
 /* POST /users */
 router.post('/', function(req, res, next) {
 	
-	User.create(req.body, function(e, user) {
+	req.body.token = jwt.sign(req.body, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
+	
+	User.create(req.body, function (e, user) {
 		if(e) return next(e);
 		res.json(user);
 	});

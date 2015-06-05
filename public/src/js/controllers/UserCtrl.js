@@ -15,8 +15,18 @@ app.controller('UserCtrl', ['$scope', 'Users', function($scope, Users) {
 			$scope.username = '';
 			$scope.email = '';
 			$scope.password = '';
+			
+			$localStorage.token = user.token;
 		});
 		
+	}
+	
+	$scope.update = function(index) {
+		
+		var user = $scope.users[index];
+		
+		Users.update({id: user._id}, user);
+
 	}
 	
 	$scope.remove = function(index) {
