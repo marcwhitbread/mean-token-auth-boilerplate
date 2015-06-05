@@ -29,12 +29,17 @@ router.get('/:id', function(req, res, next) {
 /* POST /users */
 router.post('/', function(req, res, next) {
 	
+	console.log(req.body);
+	
+	/*
 	req.body.token = jwt.sign(req.body, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
 	
 	User.create(req.body, function (e, user) {
 		if(e) return next(e);
 		res.json(user);
-	});
+	});*/
+	
+	next();
 	
 });
 

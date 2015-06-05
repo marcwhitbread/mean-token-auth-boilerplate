@@ -8,11 +8,9 @@ router.get('/', function(req, res, next) {
 	console.log('auth GET');
 });
 
-/* POST /auth */
+/* POST /auth */ //
 router.post('/', passport.authenticate('local'), function(req, res) {
-	console.log(res);
-	
-	//res.json();
+	res.json(req.user);
 });
 
 module.exports = router;
