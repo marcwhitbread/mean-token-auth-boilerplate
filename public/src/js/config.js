@@ -1,4 +1,7 @@
-app.config(['$routeProvider', function ($routeProvider) {
+app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+	
+	$httpProvider.interceptors.push('AuthInterceptor');
+	
 	$routeProvider
 		.when('/login', {
 			templateUrl: '/templates/login.html',

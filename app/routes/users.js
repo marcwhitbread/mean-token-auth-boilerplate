@@ -3,9 +3,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var User = require('../models/User.js');
+var authCheck = require('../includes/auth.js');
 
 /* GET /users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', authCheck.ensure, function(req, res, next) {
 	
 	User
 		.find()
@@ -17,7 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET /users/id */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
 	User.findById(req.params.id, function (e, user) {
 		if(e) return next(e);
@@ -27,24 +28,19 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* POST /users */
-router.post('/', function(req, res, next) {
-	
-	console.log(req.body);
-	
-	/*
+router.post('/', authCheck.ensure, function(req, res, next) {
+
 	req.body.token = jwt.sign(req.body, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
 	
 	User.create(req.body, function (e, user) {
 		if(e) return next(e);
 		res.json(user);
-	});*/
-	
-	next();
+	});
 	
 });
 
 /* PUT /users/:id */
-router.put('/:id', function(req, res, next) {
+router.put('/:id', authCheck.ensure, function(req, res, next) {
 	
 	User.findByIdAndUpdate(req.params.id, req.body, function (e, user) {
 		if(e) return next(e);
@@ -54,7 +50,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE /users/:id */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', authCheck.ensure, function(req, res, next) {
 	
 	User.findByIdAndRemove(req.params.id, req.body, function(e, post) {
 		if(e) return next(e);

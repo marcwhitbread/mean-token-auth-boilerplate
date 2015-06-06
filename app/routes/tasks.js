@@ -3,9 +3,10 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Task = require('../models/Task.js');
+var authCheck = require('../includes/auth.js');
 
 /* GET /tasks listing. */
-router.get('/', function(req, res, next) {
+router.get('/', authCheck.ensure, function(req, res, next) {
 	
 	Task
 		.find()
@@ -18,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET /tasks/id */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
 	Task.findById(req.params.id, function (e, post) {
 		if(e) return next(e);
@@ -28,7 +29,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* POST /tasks */
-router.post('/', function(req, res, next) {
+router.post('/', authCheck.ensure, function(req, res, next) {
 	
 	Task.create(req.body, function (e, task) {
 		if(e) return next(e);
@@ -42,7 +43,7 @@ router.post('/', function(req, res, next) {
 });
 
 /* PUT /tasks/:id */
-router.put('/:id', function(req, res, next) {
+router.put('/:id', authCheck.ensure, function(req, res, next) {
 	
 	Task.findByIdAndUpdate(req.params.id, req.body, function (e, task) {
 		if(e) return next(e);
@@ -56,7 +57,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE /tasks/:id */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', authCheck.ensure, function(req, res, next) {
 	
 	Task.findByIdAndRemove(req.params.id, req.body, function(e, post) {
 		if(e) return next(e);

@@ -1,4 +1,4 @@
-app.controller('UserCtrl', ['$scope', 'Users', function($scope, Users) {
+app.controller('UserCtrl', ['$scope', '$localStorage', 'Users', function($scope, $localStorage, Users) {
 	
 	$scope.users = Users.query();
 	

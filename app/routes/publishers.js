@@ -3,9 +3,10 @@ var router = express.Router();
 
 var mongoose = require('mongoose');
 var Publisher = require('../models/Publisher.js');
+var authCheck = require('../includes/auth.js');
 
 /* GET /publisher listing. */
-router.get('/', function(req, res, next) {
+router.get('/', authCheck.ensure, function(req, res, next) {
 	
 	Publisher.find(function (e, publishers) {
 		if(e) return next(e);
@@ -15,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET /publisher/username */
-router.get('/:username', function(req, res, next) {
+router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
 	Publisher.findById(req.params.id, function (e, post) {
 		if(e) return next(e);
@@ -25,7 +26,7 @@ router.get('/:username', function(req, res, next) {
 });
 
 /* POST /publisher */
-router.post('/', function(req, res, next) {
+router.post('/', authCheck.ensure, function(req, res, next) {
 	
 	Publisher.create(req.body, function (e, post) {
 		if(e) return next(e);
@@ -35,7 +36,7 @@ router.post('/', function(req, res, next) {
 });
 
 /* PUT /publisher/:id */
-router.put('/:id', function(req, res, next) {
+router.put('/:id', authCheck.ensure, function(req, res, next) {
 
 	Publisher.findByIdAndUpdate(req.params.id, req.body, function (e, post) {
 		if(e) return next(e);
@@ -45,7 +46,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE /publisher/:id */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', authCheck.ensure, function(req, res, next) {
 	
 	Publisher.findByIdAndRemove(req.params.id, req.body, function(e, post) {
 		if(e) return next(e);
