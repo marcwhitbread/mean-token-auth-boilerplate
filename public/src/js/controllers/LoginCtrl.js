@@ -10,7 +10,7 @@ app.controller('LoginCtrl', ['$scope', '$localStorage', '$location', 'Auth', fun
 			
 			$localStorage.token = user.token;
 			$scope.error = '';
-			$location.path('/tasks');
+			$location.path('/users');
 			
 		}, function(e) {
 			

@@ -1,12 +1,19 @@
 New user <input placeholder="username" type="text" ng-model="username"/>
 <input placeholder="email" type="text" ng-model="email"/>
 <input placeholder="********" type="password" ng-model="password"/>
+<select ng-model="userRole" ng-options="role.name for role in roles"></select> 
 <input type="submit" value="Sign Up" ng-click = "signup();"/>
 
 <ul>
 	<li ng-repeat="user in users">
 	
-		<a href="#/user/{{user._id}}">{{user.username}}, {{user.email}}, {{user.password}}</a> 
+		<a href="#/user/{{user._id}}">{{user.username}}, {{user.email}}, {{user.password}}</a>
+		
+		role  
+		<select 
+			ng-model="user.role._id" 
+			ng-options="role._id as role.name for role in roles"></select> 
+			
 		<button ng-click = "update($index);">update</button>
 		<button ng-click = "remove($index);">delete</button>
 		
@@ -16,6 +23,7 @@ New user <input placeholder="username" type="text" ng-model="username"/>
 <a href = "#/users">Manage Users</a>
 <a href = "#/tasks">Manage Tasks</a>
 <a href = "#/publishers">Manage Publishers</a>
+<a href = "#/roles">Manage Roles</a>
 
 <br />
 

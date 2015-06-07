@@ -1,6 +1,10 @@
-app.controller('UserCtrl', ['$scope', '$localStorage', 'Users', function($scope, $localStorage, Users) {
+app.controller('UserCtrl', ['$scope', 'Users', 'Roles', function($scope, Users, Roles) {
 	
 	$scope.users = Users.query();
+	Roles.query(function(res) {
+		$scope.roles = res;
+		$scope.userRole = $scope.roles[0];
+	});
 	
 	$scope.signup = function() {
 		
@@ -8,15 +12,13 @@ app.controller('UserCtrl', ['$scope', '$localStorage', 'Users', function($scope,
 		if(!$scope.email || $scope.email.length < 1) return;
 		if(!$scope.password || $scope.password.length < 1) return;
 		
-		var user = new Users({ username: $scope.username, email: $scope.email, password: $scope.password });
+		var user = new Users({ username: $scope.username, email: $scope.email, password: $scope.password, role: $scope.userRole._id });
 
 		user.$save(function() {
 			$scope.users.push(user);
 			$scope.username = '';
 			$scope.email = '';
 			$scope.password = '';
-			
-			$localStorage.token = user.token;
 		});
 		
 	}

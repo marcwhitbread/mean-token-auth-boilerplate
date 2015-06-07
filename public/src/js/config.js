@@ -18,6 +18,11 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 			controller: 'PublisherCtrl'
 		})
 		
+		.when('/roles', {
+			templateUrl: '/templates/roles.html',
+			controller: 'RoleCtrl'
+		})
+		
 		.when('/tasks', {
 			templateUrl: '/templates/tasks.html',
 			controller: 'TaskCtrl'
@@ -29,6 +34,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 		})
 		
 		.otherwise({
-        	redirectTo: '/tasks'
+        	redirectTo: '/login'
       	});
 }]);

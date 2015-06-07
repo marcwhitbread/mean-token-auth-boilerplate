@@ -1,12 +1,14 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+Schema = mongoose.Schema;
 
 var UserSchema = new mongoose.Schema({
 	username: { type: String, required: true, unique: true },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	token: { type: String, default: '' },
-	updated_at: { type: Date, default: Date.now }
+	updated_at: { type: Date, default: Date.now },
+	role: { type: Schema.Types.ObjectId, ref: 'Role', required: true }
 });
 
 //bcrypt
@@ -38,5 +40,4 @@ UserSchema.methods.validPassword = function(password, callback) {
 	
 }
 
-var User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);;

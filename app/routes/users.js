@@ -10,6 +10,7 @@ router.get('/', authCheck.ensure, function(req, res, next) {
 	
 	User
 		.find()
+		.populate('role')
 		.exec(function(e, users) {
 			if(e) return next(e);
 			res.json(users);
@@ -22,7 +23,11 @@ router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
 	User.findById(req.params.id, function (e, user) {
 		if(e) return next(e);
-		res.json(user);
+		
+		user.populate('role', function(e) {
+			if(e) return next(e);
+			res.json(user);
+		});
 	});
 	
 });
@@ -30,11 +35,15 @@ router.get('/:id', authCheck.ensure, function(req, res, next) {
 /* POST /users */
 router.post('/', authCheck.ensure, function(req, res, next) {
 
-	req.body.token = jwt.sign(req.body, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
+	//req.body.token = jwt.sign(req.body, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
 	
-	User.create(req.body, function (e, user) {
+	User.create(req.body, function(e, user) {
 		if(e) return next(e);
-		res.json(user);
+		
+		user.populate('role', function(e) {
+			if(e) return next(e);
+			res.json(user);
+		});
 	});
 	
 });
@@ -44,7 +53,11 @@ router.put('/:id', authCheck.ensure, function(req, res, next) {
 	
 	User.findByIdAndUpdate(req.params.id, req.body, function (e, user) {
 		if(e) return next(e);
-		res.json(user);
+		
+		user.populate('role', function(e) {
+			if(e) return next(e);
+			res.json(user);
+		});
 	});
 
 });

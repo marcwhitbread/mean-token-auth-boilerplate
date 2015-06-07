@@ -1,0 +1,29 @@
+New role <input placeholder="Publisher" type="text" ng-model="name"/> |
+User access <input type = 'checkbox' ng-model="access_users" /> |
+Task access <input type = 'checkbox' ng-model="access_tasks" /> |
+Publisher access <input type = 'checkbox' ng-model="access_publishers" /> |
+Role access <input type = 'checkbox' ng-model="access_roles" />
+<button ng-click="save()">Create</button>
+
+<ul>
+	<li ng-repeat="role in roles">
+	
+		{{role.name}} | 
+		User access <input type = 'checkbox' ng-model="role.access.users" /> |
+		Task access <input type = 'checkbox' ng-model="role.access.tasks" /> |
+		Publisher access <input type = 'checkbox' ng-model="role.access.publishers" /> |
+		Role access <input type = 'checkbox' ng-model="role.access.roles" />
+		<button ng-click = "update($index);">update</button>
+		<button ng-click = "remove($index);">delete</button>
+		
+	</li>
+</ul>
+
+<a href = "#/users">Manage Users</a>
+<a href = "#/tasks">Manage Tasks</a>
+<a href = "#/publishers">Manage Publishers</a>
+<a href = "#/roles">Manage Roles</a>
+
+<br />
+
+<button ng-click = "logout();">logout</button>

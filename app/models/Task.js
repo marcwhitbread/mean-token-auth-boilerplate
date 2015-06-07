@@ -10,5 +10,4 @@ var TaskSchema = new mongoose.Schema({
 	assignee: { type: Schema.Types.ObjectId, ref: 'Publisher' }
 });
 
-var Task = mongoose.model('Task', TaskSchema);
-module.exports = Task;
+module.exports = mongoose.model('Task', TaskSchema);;

@@ -15,6 +15,7 @@ var auth = require('./app/routes/auth');
 var tasks = require('./app/routes/tasks');
 var users = require('./app/routes/users');
 var publishers = require('./app/routes/publishers');
+var roles = require('./app/routes/roles');
 
 //db connection
 mongoose.connect('mongodb://localhost/task-manager');
@@ -49,6 +50,7 @@ app.use('/auth', auth);
 app.use('/users', users);
 app.use('/publishers', publishers);
 app.use('/tasks', tasks);
+app.use('/roles', roles);
 
 //web server listening
 app.listen(8000);
