@@ -4,24 +4,28 @@ var User = require('../models/User.js');
 var methods = {
 	ensure: function(req, res, next) {
 	    
-	    if(typeof req.headers["authorization"] !== 'undefined') {
+	    if(typeof req.headers["x-access-token"] !== 'undefined') {
 		    
-		    //console.log(req, req.baseUrl, req.method);
-		    
-	        jwt.verify(req.headers["authorization"], 'secret', function(e, user) {
-		        if(e) res.sendStatus(403);
+	        jwt.verify(req.headers["x-access-token"], 'secret', function(e, user) {
 		        
-		        //console.log('ensure', user.role.access[req.baseUrl.split('/')[1]]);
+		        //check error
+		        if(e) {
+			        res.sendStatus(401).end();
+			        return;
+			    }
 		        
 		        //check user role access
-		        if(!user.role.access[req.baseUrl.split('/')[1]])
-		        	res.sendStatus(403);
-		        
-		    	next(); 
+		        if(!user.role.access[req.baseUrl.split('/')[1]]) {
+			        res.sendStatus(401).end();
+			        return;
+			    }
+			    
+		    	next();
+			    	
 	        });
 	        
 	    } else {
-	        res.sendStatus(403);
+	        res.sendStatus(403).end();
 	    }
 	    
 	}

@@ -1,6 +1,12 @@
 app.controller('PublisherCtrl', ['$scope', 'Publishers', function ($scope, Publishers) {
     
-	$scope.publishers = Publishers.query();
+    $scope.publishers = [];
+    
+	Publishers.query(function(res) {
+		$scope.publishers = res;
+	}, function(e) {
+		console.log(e);
+	});
 	
 	$scope.save = function() {
 	

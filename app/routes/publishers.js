@@ -8,6 +8,9 @@ var authCheck = require('../includes/auth.js');
 /* GET /publisher listing. */
 router.get('/', authCheck.ensure, function(req, res, next) {
 	
+	//if(!req.user.role.access[req.baseUrl.split('/')[1]])
+		//res.json({ access_error: true });
+	
 	Publisher.find(function (e, publishers) {
 		if(e) return next(e);
 		res.json(publishers);

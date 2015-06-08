@@ -4,8 +4,6 @@ app.controller('LoginCtrl', ['$scope', '$localStorage', '$location', 'Auth', fun
 	
 	$scope.login = function() {
 		
-		console.log($scope.username, $scope.password);
-		
 		Auth.login({ username: $scope.username, password: $scope.password }, function(user) {
 			
 			$localStorage.token = user.token;
