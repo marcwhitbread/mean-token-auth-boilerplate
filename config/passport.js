@@ -1,6 +1,5 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var jwt = require('jsonwebtoken');
 var User = require('../app/models/User.js');
 
 passport.serializeUser(function(user, done) {
@@ -30,12 +29,8 @@ passport.use(new LocalStrategy({
 			
 			if(!isMatch) return done(null, false, { message: 'Incorrect password.' });
 			
-			user.populate('role', function(e) {
-				if(e) return next(e);
-				
-				//create token
-				user.token = jwt.sign(user, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
-				
+			user.generateToken(function(e, user) {
+				if(e) return done(e);
 				return done(null, user);
 			});
 			

@@ -3,29 +3,49 @@ var User = require('../models/User.js');
 
 var methods = {
 	ensure: function(req, res, next) {
-	    
+
 	    if(typeof req.headers["x-access-token"] !== 'undefined') {
 		    
+		    //verify token
 	        jwt.verify(req.headers["x-access-token"], 'secret', function(e, user) {
 		        
 		        //check error
 		        if(e) {
-			        res.sendStatus(401).end();
+			        res.sendStatus(401);
 			        return;
-			    }
-		        
-		        //check user role access
-		        if(!user.role.access[req.baseUrl.split('/')[1]]) {
-			        res.sendStatus(401).end();
-			        return;
-			    }
+			    } else {
 			    
-		    	next();
+				    //get user and role for token
+				    User
+				    	.findOne({ token: req.headers["x-access-token"] })
+				    	.populate('role')
+						.exec(function(e, user) {
+							if(e) return next(e);
+							
+							//no token match found for user
+							if(!user) { 
+								res.sendStatus(401);
+								return;
+							} 
+							
+							//check role permissions
+							else if(!user.role.access[req.baseUrl.split('/')[1]]) {
+								res.sendStatus(401);
+								return;
+							}
+							
+							else {
+								req.user = user;
+								next();
+							}
+						});
+							
+				}
 			    	
 	        });
 	        
 	    } else {
-	        res.sendStatus(403).end();
+	        res.sendStatus(403);
 	    }
 	    
 	}

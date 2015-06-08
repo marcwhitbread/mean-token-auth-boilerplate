@@ -23,7 +23,7 @@ router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
 	User.findById(req.params.id, function (e, user) {
 		if(e) return next(e);
-		
+
 		user.populate('role', function(e) {
 			if(e) return next(e);
 			res.json(user);

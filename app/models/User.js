@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 Schema = mongoose.Schema;
 
 var UserSchema = new mongoose.Schema({
@@ -40,4 +41,32 @@ UserSchema.methods.validPassword = function(password, callback) {
 	
 }
 
-module.exports = mongoose.model('User', UserSchema);;
+UserSchema.methods.generateToken = function(callback) {
+	
+	var user = this;
+	
+	user.rejectToken(function(e, user) {
+		if(e) return callback(e);
+		
+		user.token = jwt.sign(user, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
+		
+		return user.save(function(e) {
+			return callback(e, user);
+		});
+	});
+	
+}
+
+UserSchema.methods.rejectToken = function(callback) {
+	
+	var user = this;
+	
+	user.token = '';
+	
+	return user.save(function(e) {
+		return callback(e, user);
+	});
+	
+}
+
+module.exports = mongoose.model('User', UserSchema);

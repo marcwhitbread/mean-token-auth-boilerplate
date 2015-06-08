@@ -2,7 +2,7 @@ app.controller('MainCtrl', ['$scope', '$localStorage', '$location', function ($s
 	
 	//console.log($localStorage.token);
 	
-	$scope.logout = function() {
+	$scope.logout = function() {	
 		delete $localStorage.token;
 		$location.path('/login');
 	}
