@@ -26,14 +26,9 @@ var methods = {
 							if(!user) { 
 								res.sendStatus(401);
 								return;
-							} 
+							}
 							
-							//check role permissions - MOVE TO ROUTES
-							/*else if(!user.role.access[req.baseUrl.split('/')[1]]) {
-								res.sendStatus(401);
-								return;
-							}*/
-							
+							//success
 							else {
 								req.user = user;
 								next();

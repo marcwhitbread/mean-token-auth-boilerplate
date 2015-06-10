@@ -41,6 +41,7 @@ UserSchema.methods.validPassword = function(password, callback) {
 	
 }
 
+//generate token
 UserSchema.methods.generateToken = function(callback) {
 	
 	var user = this;
@@ -57,14 +58,15 @@ UserSchema.methods.generateToken = function(callback) {
 	
 }
 
-UserSchema.methods.rejectToken = function(callback) {
+//revoke token
+UserSchema.methods.revokeToken = function(callback) {
 	
 	var user = this;
 	
 	user.token = '';
 	
 	return user.save(function(e) {
-		return callback(e, user);
+		return callback(e);
 	});
 	
 }

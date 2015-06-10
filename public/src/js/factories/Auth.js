@@ -1,7 +1,12 @@
 app.factory('Auth', ['$resource', function($resource) {
 	        
-	return $resource('/auth/:id', null, {
-		'login': { method: 'POST' }
-	});
+	return {
+		login: $resource('/auth/login/', null, {
+			'go': { method: 'POST' }
+		}),
+		logout: $resource('/auth/logout/', null, {
+			'go': { method: 'POST' }
+		})
+	}
 	
 }])
