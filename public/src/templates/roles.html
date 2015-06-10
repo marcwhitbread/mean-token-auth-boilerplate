@@ -1,18 +1,50 @@
-New role <input placeholder="Publisher" type="text" ng-model="name"/> |
-User access <input type = 'checkbox' ng-model="access_users" /> |
-Task access <input type = 'checkbox' ng-model="access_tasks" /> |
-Publisher access <input type = 'checkbox' ng-model="access_publishers" /> |
-Role access <input type = 'checkbox' ng-model="access_roles" />
+New role <input placeholder="Publisher" type="text" ng-model="name"/><br />
+&nbsp;&nbsp;&nbsp;User access: 
+	C <input type = 'checkbox' ng-model="access_users.create" /> 
+	R <input type = 'checkbox' ng-model="access_users.read" /> 
+	U <input type = 'checkbox' ng-model="access_users.update" /> 
+	D <input type = 'checkbox' ng-model="access_users.delete" /><br />
+&nbsp;&nbsp;&nbsp;Task access: 
+	C <input type = 'checkbox' ng-model="access_tasks.create" /> 
+	R <input type = 'checkbox' ng-model="access_tasks.read" /> 
+	U <input type = 'checkbox' ng-model="access_tasks.update" /> 
+	D <input type = 'checkbox' ng-model="access_tasks.delete" /><br />
+&nbsp;&nbsp;&nbsp;Publisher access: 
+	C <input type = 'checkbox' ng-model="access_publishers.create" /> 
+	R <input type = 'checkbox' ng-model="access_publishers.read" /> 
+	U <input type = 'checkbox' ng-model="access_publishers.update" /> 
+	D <input type = 'checkbox' ng-model="access_publishers.delete" /><br />
+&nbsp;&nbsp;&nbsp;Role access: 
+	C <input type = 'checkbox' ng-model="access_roles.create" /> 
+	R <input type = 'checkbox' ng-model="access_roles.read" /> 
+	U <input type = 'checkbox' ng-model="access_roles.update" /> 
+	D <input type = 'checkbox' ng-model="access_roles.delete" /><br />
 <button ng-click="save()">Create</button>
 
 <ul>
 	<li ng-repeat="role in roles">
 	
-		{{role.name}} | 
-		User access <input type = 'checkbox' ng-model="role.access.users" /> |
-		Task access <input type = 'checkbox' ng-model="role.access.tasks" /> |
-		Publisher access <input type = 'checkbox' ng-model="role.access.publishers" /> |
-		Role access <input type = 'checkbox' ng-model="role.access.roles" />
+		{{role.name}}<br /> 
+		&nbsp;&nbsp;&nbsp;User access: 
+			C <input type = 'checkbox' ng-model="role.access.users.create" /> 
+			R <input type = 'checkbox' ng-model="role.access.users.read" /> 
+			U <input type = 'checkbox' ng-model="role.access.users.update" /> 
+			D <input type = 'checkbox' ng-model="role.access.users.delete" /><br />
+		&nbsp;&nbsp;&nbsp;Task access: 
+			C <input type = 'checkbox' ng-model="role.access.tasks.create" /> 
+			R <input type = 'checkbox' ng-model="role.access.tasks.read" /> 
+			U <input type = 'checkbox' ng-model="role.access.tasks.update" /> 
+			D <input type = 'checkbox' ng-model="role.access.tasks.delete" /><br />
+		&nbsp;&nbsp;&nbsp;Publisher access: 
+			C <input type = 'checkbox' ng-model="role.access.publishers.create" /> 
+			R <input type = 'checkbox' ng-model="role.access.publishers.read" /> 
+			U <input type = 'checkbox' ng-model="role.access.publishers.update" /> 
+			D <input type = 'checkbox' ng-model="role.access.publishers.delete" /><br />
+		&nbsp;&nbsp;&nbsp;Role access: 
+			C <input type = 'checkbox' ng-model="role.access.roles.create" /> 
+			R <input type = 'checkbox' ng-model="role.access.roles.read" /> 
+			U <input type = 'checkbox' ng-model="role.access.roles.update" /> 
+			D <input type = 'checkbox' ng-model="role.access.roles.delete" /><br />
 		<button ng-click = "update($index);">update</button>
 		<button ng-click = "remove($index);">delete</button>
 		

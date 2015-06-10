@@ -9,10 +9,30 @@ app.controller('RoleCtrl', ['$scope', 'Roles', function ($scope, Roles) {
 		var role = new Roles({ 
 			name: $scope.name, 
 			access: {
-				users: $scope.access_users,
-				tasks: $scope.access_tasks,
-				publishers: $scope.access_publishers,
-				roles: $scope.access_roles
+				users: {
+					create: $scope.access_users.create,
+					read: $scope.access_users.read,
+					update: $scope.access_users.update,
+					delete: $scope.access_users.delete
+				},
+				tasks: {
+					create: $scope.access_users.create,
+					read: $scope.access_users.read,
+					update: $scope.access_users.update,
+					delete: $scope.access_users.delete
+				},
+				publishers: {
+					create: $scope.access_users.create,
+					read: $scope.access_users.read,
+					update: $scope.access_users.update,
+					delete: $scope.access_users.delete
+				},
+				roles: {
+					create: $scope.access_users.create,
+					read: $scope.access_users.read,
+					update: $scope.access_users.update,
+					delete: $scope.access_users.delete
+				},
 			} 
 		});
 		

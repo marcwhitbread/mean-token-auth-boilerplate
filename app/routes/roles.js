@@ -8,6 +8,11 @@ var authCheck = require('../includes/auth.js');
 /* GET /roles listing. */
 router.get('/', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.roles.read) {
+		res.json({ user_access: false });
+		return;
+	}
+	
 	Role
 		.find()
 		.exec(function(e, roles) {
@@ -20,6 +25,11 @@ router.get('/', authCheck.ensure, function(req, res, next) {
 /* GET /roles/id */
 router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.roles.read) {
+		res.json({ user_access: false });
+		return;
+	}
+	
 	Role.findById(req.params.id, function (e, role) {
 		if(e) return next(e);
 		res.json(role);
@@ -30,6 +40,11 @@ router.get('/:id', authCheck.ensure, function(req, res, next) {
 /* POST /roles */
 router.post('/', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.roles.create) {
+		res.json({ user_access: false });
+		return;
+	}
+
 	Role.create(req.body, function (e, role) {
 		if(e) return next(e);
 		res.json(role);
@@ -40,6 +55,11 @@ router.post('/', authCheck.ensure, function(req, res, next) {
 /* PUT /roles/:id */
 router.put('/:id', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.roles.update) {
+		res.json({ user_access: false });
+		return;
+	}
+	
 	Role.findByIdAndUpdate(req.params.id, req.body, function (e, role) {
 		if(e) return next(e);
 		res.json(role);
@@ -49,6 +69,11 @@ router.put('/:id', authCheck.ensure, function(req, res, next) {
 
 /* DELETE /roles/:id */
 router.delete('/:id', authCheck.ensure, function(req, res, next) {
+	
+	if(!req.user.role.access.roles.delete) {
+		res.json({ user_access: false });
+		return;
+	}
 	
 	Role.findByIdAndRemove(req.params.id, req.body, function(e, post) {
 		if(e) return next(e);

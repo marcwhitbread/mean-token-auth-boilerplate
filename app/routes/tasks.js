@@ -8,6 +8,11 @@ var authCheck = require('../includes/auth.js');
 /* GET /tasks listing. */
 router.get('/', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.tasks.read) {
+		res.json({ user_access: false });
+		return;
+	}
+	
 	Task
 		.find()
 		.populate('publisher assignee')
@@ -21,6 +26,11 @@ router.get('/', authCheck.ensure, function(req, res, next) {
 /* GET /tasks/id */
 router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.tasks.read) {
+		res.json({ user_access: false });
+		return;
+	}
+
 	Task.findById(req.params.id, function (e, post) {
 		if(e) return next(e);
 		res.json(post);
@@ -31,6 +41,11 @@ router.get('/:id', authCheck.ensure, function(req, res, next) {
 /* POST /tasks */
 router.post('/', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.tasks.create) {
+		res.json({ user_access: false });
+		return;
+	}
+
 	Task.create(req.body, function (e, task) {
 		if(e) return next(e);
 		
@@ -45,6 +60,11 @@ router.post('/', authCheck.ensure, function(req, res, next) {
 /* PUT /tasks/:id */
 router.put('/:id', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.tasks.update) {
+		res.json({ user_access: false });
+		return;
+	}
+
 	Task.findByIdAndUpdate(req.params.id, req.body, function (e, task) {
 		if(e) return next(e);
 		
@@ -59,6 +79,11 @@ router.put('/:id', authCheck.ensure, function(req, res, next) {
 /* DELETE /tasks/:id */
 router.delete('/:id', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.tasks.delete) {
+		res.json({ user_access: false });
+		return;
+	}
+
 	Task.findByIdAndRemove(req.params.id, req.body, function(e, post) {
 		if(e) return next(e);
 		res.json(post);

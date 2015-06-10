@@ -4,10 +4,30 @@ Schema = mongoose.Schema;
 var RoleSchema = new mongoose.Schema({
 	name: String,
 	access: {
-		users: { type: Boolean, default: false },
-		tasks: { type: Boolean, default: false },
-		publishers: { type: Boolean, default: false },
-		roles: { type: Boolean, default: false },
+		users: { 
+			create: { type: Boolean, default: false },
+			read: { type: Boolean, default: false },
+			update: { type: Boolean, default: false },
+			delete: { type: Boolean, default: false }
+		},
+		tasks: { 
+			create: { type: Boolean, default: false },
+			read: { type: Boolean, default: false },
+			update: { type: Boolean, default: false },
+			delete: { type: Boolean, default: false }
+		},
+		publishers: { 
+			create: { type: Boolean, default: false },
+			read: { type: Boolean, default: false },
+			update: { type: Boolean, default: false },
+			delete: { type: Boolean, default: false }
+		},
+		roles: { 
+			create: { type: Boolean, default: false },
+			read: { type: Boolean, default: false },
+			update: { type: Boolean, default: false },
+			delete: { type: Boolean, default: false }
+		},
 	},
 	updated_at: { type: Date, default: Date.now }
 });

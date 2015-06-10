@@ -28,11 +28,11 @@ var methods = {
 								return;
 							} 
 							
-							//check role permissions
-							else if(!user.role.access[req.baseUrl.split('/')[1]]) {
+							//check role permissions - MOVE TO ROUTES
+							/*else if(!user.role.access[req.baseUrl.split('/')[1]]) {
 								res.sendStatus(401);
 								return;
-							}
+							}*/
 							
 							else {
 								req.user = user;

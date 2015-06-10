@@ -8,6 +8,11 @@ var authCheck = require('../includes/auth.js');
 /* GET /users listing. */
 router.get('/', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.users.read) {
+		res.json({ user_access: false });
+		return;
+	}
+	
 	User
 		.find()
 		.populate('role')
@@ -21,7 +26,12 @@ router.get('/', authCheck.ensure, function(req, res, next) {
 /* GET /users/id */
 router.get('/:id', authCheck.ensure, function(req, res, next) {
 	
-	User.findById(req.params.id, function (e, user) {
+	if(!req.user.role.access.users.read) {
+		res.json({ user_access: false });
+		return;
+	}
+	
+	User.findById(req.params.id, function(e, user) {
 		if(e) return next(e);
 
 		user.populate('role', function(e) {
@@ -35,7 +45,10 @@ router.get('/:id', authCheck.ensure, function(req, res, next) {
 /* POST /users */
 router.post('/', authCheck.ensure, function(req, res, next) {
 
-	//req.body.token = jwt.sign(req.body, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
+	if(!req.user.role.access.users.create) {
+		res.json({ user_access: false });
+		return;
+	}
 	
 	User.create(req.body, function(e, user) {
 		if(e) return next(e);
@@ -51,7 +64,12 @@ router.post('/', authCheck.ensure, function(req, res, next) {
 /* PUT /users/:id */
 router.put('/:id', authCheck.ensure, function(req, res, next) {
 	
-	User.findByIdAndUpdate(req.params.id, req.body, function (e, user) {
+	if(!req.user.role.access.users.update) {
+		res.json({ user_access: false });
+		return;
+	}
+
+	User.findByIdAndUpdate(req.params.id, req.body, function(e, user) {
 		if(e) return next(e);
 		
 		user.populate('role', function(e) {
@@ -65,6 +83,11 @@ router.put('/:id', authCheck.ensure, function(req, res, next) {
 /* DELETE /users/:id */
 router.delete('/:id', authCheck.ensure, function(req, res, next) {
 	
+	if(!req.user.role.access.users.delete) {
+		res.json({ user_access: false });
+		return;
+	}	
+
 	User.findByIdAndRemove(req.params.id, req.body, function(e, post) {
 		if(e) return next(e);
 		res.json(post);
