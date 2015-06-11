@@ -8,6 +8,16 @@ module.exports = function(grunt) {
 		    	dest: 'public/dist/js/script.js'
 	    	}
     	},
+    	copy: {
+	    	copy_lib: {
+		    	files: [{
+			    	expand: true,
+					cwd: 'public/src/lib',
+				    src: ['**'],
+				    dest: 'public/dist/lib/'
+				}]
+	    	}
+    	},
     	htmlmin: {
 	    	compile: {
 		    	options: {
@@ -64,6 +74,7 @@ module.exports = function(grunt) {
     
     //load tasks
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -71,6 +82,6 @@ module.exports = function(grunt) {
     
     //register tasks
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('compile', ['concat', 'htmlmin', 'imagemin', 'less']);
+    grunt.registerTask('compile', ['concat', 'copy', 'htmlmin', 'imagemin', 'less']);
     
 }
