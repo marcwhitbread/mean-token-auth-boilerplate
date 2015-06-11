@@ -1,6 +1,6 @@
 # MEAN Stack Token Authentication Boilerplate
 
-MEAN stack (MongoDB, ExpressJS, AngularJS, Node.js) token authentication boinerplate with user and role management
+MEAN stack (MongoDB, ExpressJS, AngularJS, Node.js) token authentication boinerplate with user and role management.
 
 ## What you need
 
@@ -11,7 +11,7 @@ You will need to install a couple things globally to get going:
 ## Setup
 
 In your terminal you will need to:
-- Navigate to your repo ``` cd /path/to/repo/ ```
+- Navigate to your local repo ``` cd /path/to/repo/ ```
 - Get all the dependencies to run the application with ``` npm install ```
 - Compile the appication source with ``` grunt compile ```
 - Open a new terminal window and start the process for your MondoDB ``` mongod ```
