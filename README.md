@@ -15,8 +15,11 @@ In your terminal you will need to:
 - Get all the dependencies to run the application with ``` npm install ```
 - Compile the appication source with ``` grunt compile ```
 - Open a new terminal window and start the process for your MondoDB ``` mongod ```
-- Open a new terminal window and start the Node.js server ``` node server.js ```
+- Open a new terminal window and start the Node.js server process for populating the db with an admin user and role ``` node populate.js ```
+- Open a new terminal window and start the Node.js server to run the application ``` node server.js ```
 
 ## Good to go?
 
-Navigate to ``` http://localhost:8000/ ``` in your browser. If you see a login page your all set!
+Navigate to ``` http://localhost:8000/ ``` in your browser. If you see a login page your all set! 
+
+The username and password to login is ``` admin ```

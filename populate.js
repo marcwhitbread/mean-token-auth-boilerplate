@@ -67,6 +67,9 @@ Role.create(adminRole, function (e, role) {
 		
 		adminUser = user;
 		console.log(user);
+		
+		//close server
+		app.close();
 	});
 });
 
