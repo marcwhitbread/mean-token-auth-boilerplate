@@ -18,7 +18,7 @@ var publishers = require('./app/routes/publishers');
 var roles = require('./app/routes/roles');
 
 //db connection
-mongoose.connect('mongodb://localhost/task-manager');
+mongoose.connect('mongodb://localhost/mean-token-auth-boilerplate');
 
 //set view engine
 app.set('views', path.join(__dirname, 'app/views'));

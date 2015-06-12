@@ -46,7 +46,7 @@ UserSchema.methods.generateToken = function(callback) {
 	
 	var user = this;
 	
-	user.rejectToken(function(e, user) {
+	user.revokeToken(function(e) {
 		if(e) return callback(e);
 		
 		user.token = jwt.sign(user, 'secret', { expiresInSeconds: 2592000 }); //60*60*24*30 = 30 days
